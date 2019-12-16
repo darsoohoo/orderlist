@@ -1,11 +1,57 @@
-const OrderList = require('./orderlist');
+class Order {
+    constructor(prescription) {
+        this.prescription = prescription;
+    }
+}
 
-console.log(document.querySelector('#task-title'));
+class OrderList {
+    constructor() {
+        this.list = {};
+    }
 
-// document.querySelector('order-form').addEventListener('submit', addOrder)
+    add(presc) {
+        const order = new Order(presc)
+            if(!this.list[presc]) {
+                this.list[presc] = 1;
+            } else {
+                this.list[presc]++;
+            }
+    }
+
+    removeAt(index) {
+        // remove at index
+        const key = Object.keys(this.list)[index]
+        if(key) {
+            this.list[key]--;
+        }
+    }
+}
+
 
 // const ol = new OrderList;
-// ol();
-// const addOrder = () => {
-//     ol.add('')
-// }
+
+// ol.add('coughdrop')
+// ol.add('coughdrop')
+// ol.add('nasalspray')
+// ol.add('eyedrops')
+// ol.add('eyedrops')
+// ol.add('eyedrops')
+// ol.removeAt(2);
+// console.log(ol);
+
+const ol = new OrderList;
+
+const presInput = document.getElementById('prescription');
+
+const addOrder = () => {
+  
+    ol.add(presInput.value)
+    console.log(presInput.value)
+}
+
+
+presInput.addEventListener('keypress', addOrder)
+
+
+
+
